@@ -6,6 +6,8 @@ var clea = require('gulp-clean');
 var shel = require('gulp-shell');
 var haml = require('gulp-haml');
 
+var hook = false;
+
 gulp.task('clean_html', function() {
   gulp
   .src("dist/**/*.html", {read: false})
@@ -34,9 +36,9 @@ gulp.task('build_coff', function() {
 
 gulp.task('clean_dock', shel.task([
   'docker rm -f $(docker ps -a -q)'
-]));
+], {ignoreErrors: true}));
 
-gulp.task('dock', shel.task([
+gulp.task('dock', ['clean_dock'], shel.task([
   'docker build -t phoenix .',
   'docker run --detach=true -p 8080:8080 phoenix'
 ]));
@@ -51,6 +53,7 @@ var build_order = ['clean', 'build', 'clean_dock', 'dock'];
 
 gulp.task('clean', ['clean_html', 'clean_ecma'], function() {});
 gulp.task('devel', build_order, function() {
+  hook = true;
   file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
     console.log(splash);
     console.log("NoSprawl Project Phoenix");
@@ -62,3 +65,19 @@ gulp.task('devel', build_order, function() {
 });
 
 gulp.task('default', ['devel'], function() {});
+
+function exitHandler(options, err) {
+  if(hook) {
+    gulp.start('clean_dock');
+  }
+  
+  process.exit();
+}
+
+if(hook) {
+  process.stdin.resume();
+}
+
+process.on('exit', exitHandler.bind(null,{cleanup:true}));
+process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
