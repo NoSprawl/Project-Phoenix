@@ -5,6 +5,7 @@ var coff = require('gulp-coffee');
 var clea = require('gulp-clean');
 var shel = require('gulp-shell');
 var haml = require('gulp-haml');
+var sass = require('gulp-sass');
 
 var hook = false;
 
@@ -21,9 +22,22 @@ gulp.task('build_haml', function() {
   .pipe(gulp.dest("dist"));
 });
 
+gulp.task('build_sass', function() {
+  gulp
+  .src("src/www/**/*.scss")
+  .pipe(sass())
+  .pipe(gulp.dest("dist"));
+});
+
 gulp.task('clean_ecma', function() {
   gulp
   .src("dist/**/*.js", {read: false})
+  .pipe(clea({force: true}));
+});
+
+gulp.task('clean_styl', function() {
+  gulp
+  .src("dist/**/*.css", {read: false})
   .pipe(clea({force: true}));
 });
 
@@ -43,7 +57,7 @@ gulp.task('dock', ['clean_dock'], shel.task([
   'docker run --detach=true -p 8080:8080 phoenix'
 ]));
 
-gulp.task('build', ['clean', 'build_haml', 'build_coff'], function() {
+gulp.task('build', ['clean', 'build_haml', 'build_coff', 'build_sass'], function() {
   gulp
   .src('src/www/package.json')
   .pipe(gulp.dest('dist'));
@@ -51,7 +65,7 @@ gulp.task('build', ['clean', 'build_haml', 'build_coff'], function() {
 
 var build_order = ['clean', 'build', 'clean_dock', 'dock'];
 
-gulp.task('clean', ['clean_html', 'clean_ecma'], function() {});
+gulp.task('clean', ['clean_html', 'clean_ecma', 'clean_styl'], function() {});
 gulp.task('devel', build_order, function() {
   hook = true;
   file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
