@@ -1,0 +1,24 @@
+{
+  "name": "nos-pro-phx-toolchain",
+  "description": "Toolchain for NoSprawl Project Phoenix development, testing, and deployment.",
+  "version": "1.0.0",
+  "license": "CC-BY-NC-ND-4.0",
+  "scripts": {},
+  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NoSprawl/Project-Phoenix"
+  },
+  
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-haml": "0.1.6",
+    "gulp-coffee": "2.3.1",
+    "gulp-sass": "2.1.1",
+    "gulp-clean": "0.3.1",
+    "gulp-docker": "0.0.11",
+    "gulp-livereload": "3.8.1",
+    "gulp-shell": "0.5.1"
+  }
+  
+}
