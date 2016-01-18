@@ -16,7 +16,6 @@
     "gulp-coffee": "2.3.1",
     "gulp-sass": "2.1.1",
     "gulp-clean": "0.3.1",
-    "gulp-docker": "0.0.11",
     "gulp-livereload": "3.8.1",
     "gulp-shell": "0.5.1"
   }

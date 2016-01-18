@@ -4,3 +4,5 @@
 NPM + GULP + DOCKER
 
 ### Get Started
+`npm install`
+`gulp devel`

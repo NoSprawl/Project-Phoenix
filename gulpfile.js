@@ -1,7 +1,6 @@
 var file = require('fs');
 var gulp = require('gulp');
 var live = require('gulp-livereload');
-var dock = require('gulp-docker');
 var coff = require('gulp-coffee');
 var clea = require('gulp-clean');
 var shel = require('gulp-shell');
@@ -33,16 +32,14 @@ gulp.task('build_coff', function() {
   .pipe(gulp.dest("dist"));
 });
 
-gulp.task('dock', function() {
-  new dock(gulp, {
-    phoenix: {
-      dockerfile: __dirname,
-      ports: '8080:8080',
-      'name': 'phoenix'
-    }
-  });
-  
-});
+gulp.task('clean_dock', shel.task([
+  'docker rm -f $(docker ps -a -q)'
+]));
+
+gulp.task('dock', shel.task([
+  'docker build -t phoenix .',
+  'docker run --detach=true -p 8080:8080 phoenix'
+]));
 
 gulp.task('build', ['clean', 'build_haml', 'build_coff'], function() {
   gulp
@@ -51,13 +48,13 @@ gulp.task('build', ['clean', 'build_haml', 'build_coff'], function() {
 });
 
 gulp.task('clean', ['clean_html', 'clean_ecma'], function() {});
-gulp.task('devel', function() {
+gulp.task('devel', ['clean', 'build', 'clean_dock', 'dock'], function() {
   file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
     console.log(splash);
     console.log("NoSprawl Project Phoenix");
     console.log("Version 1.11");
     live.listen();
-    gulp.watch('src/**/*', ['build', 'dock']);
+    gulp.watch('src/**/*', ['clean_dock', 'clean', 'build', 'dock']);
   });
   
 });
