@@ -47,14 +47,16 @@ gulp.task('build', ['clean', 'build_haml', 'build_coff'], function() {
   .pipe(gulp.dest('dist'));
 });
 
+var build_order = ['clean', 'build', 'clean_dock', 'dock'];
+
 gulp.task('clean', ['clean_html', 'clean_ecma'], function() {});
-gulp.task('devel', ['clean', 'build', 'clean_dock', 'dock'], function() {
+gulp.task('devel', build_order, function() {
   file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
     console.log(splash);
     console.log("NoSprawl Project Phoenix");
     console.log("Version 1.11");
     live.listen();
-    gulp.watch('src/**/*', ['clean_dock', 'clean', 'build', 'dock']);
+    gulp.watch('src/**/*', build_order);
   });
   
 });
