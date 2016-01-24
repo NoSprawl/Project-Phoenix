@@ -1,12 +1,31 @@
 !!! 5
 %html
   %head
+    %base(href="/")
     %title= "NoSprawl / SecOps Platform"
-    %script(src="node_modules/angular2/bundles/angular2-polyfills.js")
-    %script(src="node_modules/rxjs/bundles/Rx.umd.js")
-    %script(src="node_modules/angular2/bundles/angular2-all.umd.js")
-    %script(src="app/components/login.js")
-    %script(src="app/boot.js")
     %link(rel="stylesheet" href="styles/base.css")
+    %script(src="node_modules/es6-shim/es6-shim.min.js")
+    %script(src="node_modules/systemjs/dist/system-polyfills.js")
+    %script(src="node_modules/angular2/bundles/angular2-polyfills.js")
+    %script(src="node_modules/systemjs/dist/system.src.js")
+    %script(src="node_modules/rxjs/bundles/Rx.js")
+    %script(src="node_modules/angular2/bundles/angular2.dev.js")
+    %script(src="node_modules/angular2/bundles/router.dev.js")
+    :javascript
+      //<!--[CDATA[
+      System.config({
+        packages: {
+          app: {
+            format: "register",
+            defaultExtension: "js"
+          }
+        
+        }
+      
+      });
+    
+      System.import("app/boot").catch(console.error.bind(console));
+      //]]-->
   %body
-    %nosprawl
+    %app
+      

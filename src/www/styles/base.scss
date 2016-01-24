@@ -1,3 +1,58 @@
 body {
- 
+  background: #000;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Nueue", Helvetica, Sans-serif;
+}
+
+header, #content {
+  color: white;
+  width: 70%;
+  position: relative;
+  margin: 30px auto 0 auto;
+}
+
+header {
+  h1 {
+    margin: 0;
+    padding: 0;
+    
+    img {
+      display: block;
+      width: 200px;
+    }
+    
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 25px;
+    right: 0;
+    
+    li {
+      display: inline-block;
+      
+      a {
+        color: #fff;
+        font-size: .8em;
+        text-decoration: none;
+        display: block;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+        
+      }
+      
+    }
+    
+  }
+  
+}
+
+#content {
+  
 }
