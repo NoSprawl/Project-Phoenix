@@ -1,6 +1,11 @@
 node_modules
+!dist/node_modules
 gulpfile.js
 package.json
 README.md
 splash.txt
 src/www
+.DS_Store
+.gitignore
+README.md
+tsconfig.json

@@ -12,10 +12,13 @@ RUN mv 0.0.0.0_8080 0.0.0.0\:8080
 WORKDIR /usr/local/gwan_linux64-bit/0.0.0.0\:8080/\#0.0.0.0/
 RUN rm -rf csp/*
 RUN rm -rf www/*
+RUN rm -rf handlers/*
+RUN ls handlers
 ADD dist/package.json www/package.json
 RUN npm install --prefix www
 ADD dist www
 ADD src/csp csp
+ADD src/handlers handlers
 RUN rm -f www/package.json
 RUN chown -hR www-data www
 RUN chown -hR www-data gzip

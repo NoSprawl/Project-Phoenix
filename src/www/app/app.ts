@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Login} from './components/login';
 import {Hubs} from './components/hubs';
 import {Policies} from './components/policies';
+import {Router} from 'angular2/router'
 
 @Component({
   selector: 'app',
@@ -10,8 +11,11 @@ import {Policies} from './components/policies';
   directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
+  {path: '/', redirectTo: ['Login']},
   {path: '/login',    name: 'Login',    component: Login},
   {path: '/hubs',     name: 'Hubs',     component: Hubs},
   {path: '/policies', name: 'Policies', component: Policies}
 ])
-export class App { }
+export class App {
+
+}
