@@ -1,0 +1,19 @@
+{
+  "name": "Project-Phoenix",
+  "directory": "src/www/styles",
+  "registry": {"search": ["https://bower.herokuapp.com"]},
+  "version": "1.0.0",
+  "homepage": "https://github.com/NoSprawl/Project-Phoenix",
+  "authors": [
+    "Mike Keen <mkeen.atl@gmail.com>"
+  ],
+  "description": "NoSprawl 2.0",
+  "license": "NONE",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

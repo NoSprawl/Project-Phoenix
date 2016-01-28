@@ -3,12 +3,11 @@
   "description": "Toolchain for NoSprawl Project Phoenix development, testing, and deployment.",
   "version": "1.0.0",
   "scripts": {},
-  
+
   "repository": {
     "type": "git",
     "url": "https://github.com/NoSprawl/Project-Phoenix"
   },
-  
   "devDependencies": {
     "gulp": "3.9.0",
     "gulp-haml": "0.1.6",
@@ -20,5 +19,5 @@
     "gulp-ruby-haml": "0.0.7",
     "gulp-install": "0.6.0"
   }
-  
+
 }

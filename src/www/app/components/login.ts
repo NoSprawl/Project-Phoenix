@@ -5,19 +5,20 @@ import {Session} from '../services/session';
 
 @Component({
   templateUrl: '/app/templates/login.html',
-  providers: [Session]
+  providers: [Session],
+  selector: 'login'
 })
 export class Login {
-  constructor(private _sessionService: Session) { }
+  constructor(private sessionService: Session) { }
 
-  model = new User(0, "", "");
-  result = null;
+  model = new User(0, "", "", "");
+  private user = null;
 
   submit() {
-    this._sessionService.login(this.model.username, this.model.password).then((res) => {
-      console.log("hi")
-      console.log(res);
-    });
+    this.sessionService.login(this.model)
+    .subscribe(
+      user => this.user = user
+    );
 
   }
 

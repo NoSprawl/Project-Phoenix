@@ -1,15 +1,16 @@
 import {Injectable} from 'angular2/core';
-import {Jsonp, Http} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import {Http} from 'angular2/http';
+import {User} from '../models/user';
 
 @Injectable()
 export class Session {
-  constructor(private jsonp: Jsonp) { }
+  constructor (private http: Http) {}
+  private loginAttemptUrl = "/?login";
 
-  login(username, password) {
-    return this.jsonp.request("/?login&callback=ng&username=mike&password=admin").map(res => {
-      return res.json();
-    }).toPromise();
-
+  login(user) {
+    return this.http.post(this.loginAttemptUrl, JSON.stringify({user}))
+                    .map(res => <User[]> res.json().data)
   }
 
 }

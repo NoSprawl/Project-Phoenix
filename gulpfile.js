@@ -65,6 +65,10 @@ gulp.task('build_haml', ['build_sass', 'build_types'], function() {
   .src("src/www/**/*.haml")
   .pipe(haml({noEscapeAttrs: true}))
   .pipe(gulp.dest("dist"));
+
+  gulp
+  .src("src/www/**/*.html")
+  .pipe(gulp.dest("dist"));
 });
 
 gulp.task('build_sass', ['build_imgs'], function() {
@@ -78,9 +82,13 @@ gulp.task('clean_dock', shel.task([
   'docker rm -f $(docker ps -a -q)'
 ], {ignoreErrors: true}));
 
+gulp.task('deep_clean_dock', shel.task([
+  'docker images -a | sed \'1 d\' | awk \'{print $3}\' | xargs -L1 docker rmi -f'
+], {ignoreErrors: true}));
+
 gulp.task('dock', ['clean_dock', 'build'], shel.task([
-  'docker build -t phoenix .',
-  'docker run --detach=true -p 8080:8080 phoenix'
+  'docker build -t phoenix . && \
+   docker run --detach=true -p 8080:8080 phoenix'
 ], {ignoreErrors: true}));
 
 gulp.task('build_stage', function() {
@@ -90,7 +98,8 @@ gulp.task('build_stage', function() {
 });
 
 gulp.task('build', ['build_haml'], function() {});
-gulp.task('clean', ['clean_html', 'clean_ecma', 'clean_styl', 'clean_imgs', 'clean_stage'], function() {});
+gulp.task('clean', ['clean_html', 'clean_ecma', 'clean_styl', 'clean_imgs',
+                    'clean_stage'], function() {});
 
 gulp.task('devel', ['dock'], function() {
   process.stdin.resume();
