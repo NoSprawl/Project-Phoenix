@@ -97,7 +97,10 @@ gulp.task('build_stage', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['build_haml'], function() {});
+gulp.task('build', ['build_haml'], function() {
+  console.log("built.");
+});
+
 gulp.task('clean', ['clean_html', 'clean_ecma', 'clean_styl', 'clean_imgs',
                     'clean_stage'], function() {});
 

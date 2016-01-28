@@ -12,7 +12,7 @@ export class Login {
   constructor(private sessionService: Session) { }
 
   model = new User(0, "", "", "");
-  private user = null;
+  user = null;
 
   submit() {
     this.sessionService.login(this.model)

@@ -1,6 +1,10 @@
 node_modules
-!dist/node_modules
 gulpfile.js
+.gitignore
+.git
+.bowerrc
+README.md
+splash.txt
 package.json
 README.md
 splash.txt

@@ -6,7 +6,7 @@ WORKDIR /usr/local
 RUN wget http://gwan.com/archives/gwan_linux64-bit.tar.bz2 && \
 tar -xjf gwan_linux64-bit.tar.bz2 && \
 rm gwan_linux64-bit.tar.bz2
-ENV PATH gwan_linux64-bit:$PATH
+ENV PATH /usr/local/gwan_linux64-bit:$PATH
 WORKDIR /usr/local/gwan_linux64-bit
 RUN rm -rf 0.0.0.0_8081_PONG
 WORKDIR /usr/local/gwan_linux64-bit/0.0.0.0\:8080/\#0.0.0.0/
@@ -22,4 +22,4 @@ RUN chown -hR www-data www && \
 chown -hR www-data gzip && \
 rm -f www/package.json
 EXPOSE 8080
-CMD /usr/local/gwan_linux64-bit/gwan
+CMD gwan
