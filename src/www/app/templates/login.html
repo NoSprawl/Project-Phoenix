@@ -1,14 +1,14 @@
 <h2>Log In</h2>
 <form (ngSubmit)='submit()'>
-  <fieldset class='form-group'>
+  <fieldset>
     <label for='login_username'>Username</label>
-    <input class="form-control" id='login_username' [(ngModel)]='model.username' ngControl='username'>
+    <input id='login_username' [(ngModel)]='model.username' >
   </fieldset>
-  <fieldset class='form-group'>
+  <fieldset>
     <label for='login_password'>Password</label>
-    <input class="form-control" id='login_password' [(ngModel)]='model.password' ngControl='password' type='password'>
+    <input id='login_password' [(ngModel)]='model.password' type='password'>
   </fieldset>
-  <fieldset class='form-group'>
-    <input class='btn btn-primary' type='submit'>
+  <fieldset>
+    <input type='submit'>
   </fieldset>
 </form>

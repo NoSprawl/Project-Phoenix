@@ -5,21 +5,18 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     %meta(http-equiv="x-ua-compatible" content="ie=edge")
     %title= "NoSprawl / SecOps Platform"
-    %link(rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css")
     %link(rel="stylesheet" href="styles/base.css")
-    %script(src="/node_modules/jquery/dist/jquery.min.js")
-    %script(src="/node_modules/tether/dist/js/tether.min.js")
-    %script(src="/node_modules/es6-shim/es6-shim.min.js")
-    %script(src="/node_modules/systemjs/dist/system-polyfills.js")
-    %script(src="/node_modules/angular2/bundles/angular2-polyfills.js")
-    %script(src="/node_modules/systemjs/dist/system.src.js")
-    %script(src="/node_modules/rxjs/bundles/Rx.js")
-    %script(src="/node_modules/angular2/bundles/angular2.dev.js")
-    %script(src="/node_modules/angular2/bundles/http.dev.js")
-    %script(src="/node_modules/angular2/bundles/router.dev.js")
+    %script(src="/node_modules/reflect-metadata/Reflect.js")
+    %script(src="/node_modules/zone.js/dist/zone.min.js")
+    %script(src="/node_modules/systemjs/dist/system.js")
     :javascript
       //<!--[CDATA[
       System.config({
+        baseURL: '/node_modules',
+        defaultJSExtensions: true,
+        paths: {
+          'app/*': './app'
+        },
         packages: {
           app: {
             format: "register",
@@ -34,4 +31,3 @@
       //]]-->
   %body
     %app
-    %script(src="/node_modules/bootstrap/dist/js/bootstrap.min.js")

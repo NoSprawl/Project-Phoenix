@@ -1,4 +1,5 @@
 node_modules
+src/www/node_modules
 gulpfile.js
 .gitignore
 .git

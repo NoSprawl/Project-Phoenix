@@ -13,6 +13,8 @@
     "gulp-haml": "0.1.6",
     "gulp-typescript": "2.10.0",
     "gulp-sass": "2.1.1",
+    "node-neat": "1.7.2",
+    "node-bourbon": "4.2.3",
     "gulp-clean": "0.3.1",
     "gulp-livereload": "3.8.1",
     "gulp-shell": "0.5.1",

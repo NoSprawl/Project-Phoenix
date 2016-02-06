@@ -4,6 +4,9 @@ import {Login} from './components/login';
 import {Hubs} from './components/hubs';
 import {Policies} from './components/policies';
 import {Router} from 'angular2/router';
+import {enableProdMode} from 'angular2/core';
+enableProdMode();
+
 import 'rxjs/add/operator/map';
 
 @Component({

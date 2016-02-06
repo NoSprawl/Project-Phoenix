@@ -74,7 +74,10 @@ gulp.task('build_haml', ['build_sass', 'build_types'], function() {
 gulp.task('build_sass', ['build_imgs'], function() {
   gulp
   .src("src/www/**/*.scss")
-  .pipe(sass())
+  .pipe(sass({
+    includePaths: require('node-bourbon').includePaths
+    .concat(require('node-neat').includePaths)
+  }))
   .pipe(gulp.dest("dist"));
 });
 
@@ -104,11 +107,15 @@ gulp.task('build', ['build_haml'], function() {
 gulp.task('devel_dock', ['dock'], function() {
   file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
     console.log(splash);
-    console.log("NoSprawl (Development Mode)");
-    console.log("Version 1.11");
+    console.log("NoSprawl Started (Development Mode)");
+    var packages = require('./src/www/package.json')
+    console.log("angular " + packages.dependencies.angular2);
     gulp.watch('src/www/app/**/*.ts', ['build_types', 'dock']);
     gulp.watch('src/www/app/**/*.haml', ['build_haml', 'dock']);
+    gulp.watch('src/www/app/**/*.html', ['build_haml', 'dock']);
     gulp.watch('src/www/styles/**/*.scss', ['build_sass', 'dock']);
+    gulp.watch('src/csp/**/*.c', ['dock']);
+    gulp.watch('src/handlers/**/*.c', ['dock']);
   });
 
 });

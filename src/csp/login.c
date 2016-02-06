@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   decoded_password[strlen(decoded_password) - 1] = 0;
 
   char *uname = "admin";
-  char *pword = "admin";
+  char *pword = "wi404";
 
   if(strcmp(decoded_username, uname) == 0) {
     if(strcmp(decoded_password, pword) == 0) {
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
       uuid_generate(guid);
       char guid_chr[255];
       uuid_unparse(guid, guid_chr);
-      xbuf_xcat(response, "{\"user\": {\"id\": 1, \"username\": \"%s\", \"password\": \"%s\", \"session_id\": \"%s\"}}",
+      xbuf_xcat(response, "{\"identifier\": {\"id\": 1}}",
                 decoded_username,
                 decoded_password,
                 guid_chr);
@@ -54,9 +54,8 @@ int main(int argc, char *argv[]) {
   }
 
   xbuf_xcat(response,
-           "{\"user\": {\"id\": 0, \"username\": \"%s\", \"password\": \"\"}}",
+           "{\"error\": {\"id\": 0, \"username\": \"%s\", \"password\": \"\"}}",
             decoded_username);
 
-  return 200;
-
+  return 401;
 }

@@ -1,6 +1,8 @@
-import {Component} from 'angular2/core';
-import {User} from '../models/user';
+"use strict";
+import {Component, EventEmitter} from 'angular2/core';
 import {NgForm} from 'angular2/common';
+import {Identifier} from '../models/identifier';
+import {User} from '../models/user';
 import {Session} from '../services/session';
 
 @Component({
@@ -10,12 +12,15 @@ import {Session} from '../services/session';
 })
 export class Login {
   constructor(private sessionService: Session) { }
-  model:User = new User();
+  errorMessage = "";
+  model = new User();
+  sess = new Identifier();
 
   submit() {
     this.sessionService.login(this.model)
     .subscribe(
-      user => this.model = <any>user
+      identifier => this.sess = <any>identifier,
+      error => this.errorMessage = <any>error
     );
 
   }
