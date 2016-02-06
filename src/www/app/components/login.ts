@@ -10,14 +10,12 @@ import {Session} from '../services/session';
 })
 export class Login {
   constructor(private sessionService: Session) { }
-
-  model = new User(0, "", "", "");
-  user = null;
+  model:User = new User();
 
   submit() {
     this.sessionService.login(this.model)
     .subscribe(
-      user => this.user = user
+      user => this.model = <any>user
     );
 
   }

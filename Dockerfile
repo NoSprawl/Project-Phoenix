@@ -1,4 +1,5 @@
-FROM ubuntu
+FROM debian:8.3
+LABEL Description="Koncep" Vendor="Mike Keen" Version="1.0"
 RUN apt-get -y update && \
 apt-get -y install wget build-essential pciutils npm gdb uuid-dev && \
 npm set progress=false

@@ -1,6 +1,5 @@
 var file = require('fs');
 var gulp = require('gulp');
-var live = require('gulp-livereload');
 var type = require('gulp-typescript');
 var clea = require('gulp-clean');
 var shel = require('gulp-shell');
@@ -40,7 +39,7 @@ gulp.task('clean_stage', function() {
 });
 
 gulp.task('build_types', ['build_stage'], function () {
-  return gulp.src('src/www/**/*.ts')
+  return gulp.src('src/www/app/**/*.ts')
 		.pipe(type({
       "target": "ES5",
       "module": "system",
@@ -49,7 +48,8 @@ gulp.task('build_types', ['build_stage'], function () {
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "removeComments": false,
-      "noImplicitAny": false
+      "noImplicitAny": false,
+      "files": []
     }))
 		.pipe(gulp.dest('dist'));
 });
@@ -86,7 +86,7 @@ gulp.task('deep_clean_dock', shel.task([
   'docker images -a | sed \'1 d\' | awk \'{print $3}\' | xargs -L1 docker rmi -f'
 ], {ignoreErrors: true}));
 
-gulp.task('dock', ['clean_dock', 'build'], shel.task([
+gulp.task('dock', ['clean_dock'], shel.task([
   'docker build -t phoenix . && \
    docker run --detach=true -p 8080:8080 phoenix'
 ], {ignoreErrors: true}));
@@ -98,13 +98,25 @@ gulp.task('build_stage', function() {
 });
 
 gulp.task('build', ['build_haml'], function() {
-  console.log("built.");
+
+});
+
+gulp.task('devel_dock', ['dock'], function() {
+  file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
+    console.log(splash);
+    console.log("NoSprawl (Development Mode)");
+    console.log("Version 1.11");
+    gulp.watch('src/www/app/**/*.ts', ['build_types', 'dock']);
+    gulp.watch('src/www/app/**/*.haml', ['build_haml', 'dock']);
+    gulp.watch('src/www/styles/**/*.scss', ['build_sass', 'dock']);
+  });
+
 });
 
 gulp.task('clean', ['clean_html', 'clean_ecma', 'clean_styl', 'clean_imgs',
                     'clean_stage'], function() {});
 
-gulp.task('devel', ['dock'], function() {
+gulp.task('devel', ['build'], function() {
   process.stdin.resume();
 
   function exitHandler(options, err) {
@@ -116,13 +128,7 @@ gulp.task('devel', ['dock'], function() {
   process.on('SIGINT', exitHandler.bind(null, {exit:true}));
   process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
 
-  file.readFile(__dirname + '/splash.txt', 'utf8', function (err, splash) {
-    console.log(splash);
-    console.log("NoSprawl Project Phoenix");
-    console.log("Version 1.11");
-    gulp.watch('src/**/*', ['dock']);
-  });
-
+  gulp.start('devel_dock');
 });
 
 gulp.task('default', ['devel'], function() {});

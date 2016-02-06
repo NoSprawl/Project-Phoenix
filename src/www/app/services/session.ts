@@ -10,7 +10,7 @@ export class Session {
 
   login(user) {
     return this.http.post(this.loginAttemptUrl, JSON.stringify({user}))
-                    .map(res => <User[]> res.json().data)
+                    .map(res => <User[]> res.json().user)
   }
 
 }

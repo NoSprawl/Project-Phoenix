@@ -54,8 +54,7 @@ int main(int argc, char *argv[]) {
   }
 
   xbuf_xcat(response,
-           "{\"user\": {\"id\": 0}}",
-            uname,
+           "{\"user\": {\"id\": 0, \"username\": \"%s\", \"password\": \"\"}}",
             decoded_username);
 
   return 200;

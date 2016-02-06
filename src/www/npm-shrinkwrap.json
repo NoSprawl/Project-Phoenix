@@ -1,0 +1,58 @@
+{
+  "name": "nos-phoenix",
+  "version": "1.0.0",
+  "npm-shrinkwrap-version": "5.4.1",
+  "node-version": "v4.0.0",
+  "dependencies": {
+    "angular2": {
+      "version": "2.0.0-beta.0",
+      "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.0.tgz"
+    },
+    "bootstrap": {
+      "version": "4.0.0-alpha.2",
+      "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.0.0-alpha.2.tgz"
+    },
+    "es6-promise": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.0.2.tgz"
+    },
+    "es6-shim": {
+      "version": "0.33.13",
+      "resolved": "https://registry.npmjs.org/es6-shim/-/es6-shim-0.33.13.tgz"
+    },
+    "jquery": {
+      "version": "2.1.4",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.1.4.tgz"
+    },
+    "reflect-metadata": {
+      "version": "0.1.2",
+      "resolved": "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.2.tgz"
+    },
+    "rxjs": {
+      "version": "5.0.0-beta.0",
+      "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.0.tgz"
+    },
+    "systemjs": {
+      "version": "0.19.6",
+      "resolved": "https://registry.npmjs.org/systemjs/-/systemjs-0.19.6.tgz",
+      "dependencies": {
+        "es6-module-loader": {
+          "version": "0.17.10",
+          "resolved": "https://registry.npmjs.org/es6-module-loader/-/es6-module-loader-0.17.10.tgz"
+        },
+        "when": {
+          "version": "3.7.7",
+          "resolved": "https://registry.npmjs.org/when/-/when-3.7.7.tgz"
+        }
+      }
+    },
+    "tether": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/tether/-/tether-1.1.1.tgz"
+    },
+    "zone.js": {
+      "version": "0.5.10",
+      "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.5.10.tgz"
+    }
+  }
+}
